@@ -1,0 +1,192 @@
+ 
+    .element_remove:hover{
+        cursor: pointer;
+    }
+    .white {
+        color: white;
+    }
+
+    .projet_img {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        /* coupe ce qui dépasse */
+    }
+
+    .projet_img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* remplit sans déformer */
+        display: block;
+        border-radius: 8px;
+    }
+
+    .id_projet {
+
+
+        padding: 10px;
+        margin: 25px;
+        transition: 1s all;
+
+
+
+        top: 0;
+        position: relative;
+        text-align: center;
+
+        box-shadow: 1px 1px rgba(240, 120, 120, 0.35);
+    }
+
+    .id_projet:hover {
+        transition: 1s all;
+        box-shadow: 1px 1px rgba(240, 11, 11, 0.35);
+
+    }
+
+    .archives-list {
+        margin-bottom: 40px;
+    }
+
+    .archives h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    /* ===== LISTE ===== */
+    .archives-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    /* ===== CARTE ARCHIVE ===== */
+    .archive-card {
+        border: 1px solid rgba(0, 11, 11, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        background: linear-gradient(to bottom right, #0001ad, #00012f);
+
+        color: white;
+
+
+    }
+
+    .archive-card {
+        max-width: 500px;
+        /* largeur max */
+        max-height: 500px;
+        /* hauteur max */
+        width: 100%;
+        /* prend toute la largeur disponible jusqu'à 500px */
+        height: 100%;
+        /* s'adapte à max-height */
+        overflow: hidden;
+        /* tout ce qui dépasse sera caché */
+        box-sizing: border-box;
+        /* inclut padding et border dans la taille max */
+    }
+
+    /* ===== HEADER ===== */
+    .archive-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .archive-header h3 {
+        margin: 0;
+        font-size: 17px;
+    }
+
+    .archive-date {
+        font-size: 12px;
+
+    }
+
+    /* ===== DESC ===== */
+    .archive-desc {
+        margin: 10px 0 16px;
+        font-size: 14px;
+
+    }
+
+    /* ===== ACTIONS ===== */
+    .archive-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* ===== BOUTONS ===== */
+    .btn {
+        border: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* RESTAURER */
+    .btn.restore {
+        background: #22c55e;
+
+    }
+
+    /* CONSULTER */
+    .btn.view {
+        background: #38bdf8;
+
+    }
+
+    /* SUPPRIMER */
+    .btn.delete {
+        background: #ef4444;
+        color: #fff;
+    }
+
+    /* HOVER */
+    .btn:hover {
+        opacity: 0.85;
+    }
+
+
+
+    .archives {
+        display: flex;
+        justify-content: space-around;
+
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    h3 {
+        font-size: 2em;
+
+        max-width: 100px;
+        /* largeur maximale */
+        position: relative;
+        white-space: nowrap;
+        /* empêche le texte de passer à la ligne */
+        overflow: hidden;
+        /* cache le texte qui dépasse */
+        text-overflow: ellipsis;
+        /* ajoute "..." si le texte est trop long */
+    }
+
+    .archive-actions {
+        margin-top: 50px;
+        margin-bottom: 20px;
+
+    }
+
+    .archive-desc {
+        background-color: white;
+    }
+ 

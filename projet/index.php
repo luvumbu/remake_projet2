@@ -741,18 +741,6 @@ $manager->pushJs();
 ?>
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 <?php
 
 
