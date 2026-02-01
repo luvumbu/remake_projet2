@@ -36,4 +36,4 @@ if ($result['success']) {
     $_SESSION["info_index"][0] = $info_index_2;
     $_SESSION["info_index"][1] =false;
 }
-       
+?>     

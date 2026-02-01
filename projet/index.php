@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="projet/css_projet.css">
+
 <?php
 require_once "projet/require_once.php";
 ?>
@@ -5,12 +7,7 @@ require_once "projet/require_once.php";
 <a href="../">
     <img width="50" height="50" src="https://img.icons8.com/ios/50/home--v1.png" alt="home--v1" />
 </a>
-
-
-<div id="index_child"></div>
 <?php
-
-
 require_once "projet/index_child.php";
 $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 
@@ -27,14 +24,8 @@ if ($result['success']) {
 } else {
     echo "Erreur : " . $result['message'];
 }
-
-
-
-
-
 ?>
 
-<link rel="stylesheet" href="projet/css_projet.css">
 
 
 
@@ -756,42 +747,17 @@ $manager->pushJs();
 
 <script>
     function add_child(_this) {
-
-
         var ok = new Information("req_on/insert_projet.php"); // création de la classe 
         ok.add("parent_projet", _this.title); // ajout de l'information pour lenvoi     
         console.log(ok.info()); // demande l'information dans le tableau
         ok.push(); // envoie l'information au code pkp 
         window.scrollTo(0, 0);
-
-
         const myTimeout = setTimeout(x, 250);
-
         function x() {
             location.reload();
         }
-
-
     }
 </script>
-
-
-<?php
-
-/*
-<div>
-    <h1>
-        <?= $mes_projets[0]["name_projet"] ?>
-    </h1>
-    <p>
-        <?= $mes_projets[0]["description_projet"] ?>
-    </p>
-</div>
-*/
-
-
-?>
-
 <style>
     html {
   scroll-behavior: smooth;
