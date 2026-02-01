@@ -1,8 +1,5 @@
 <div class="menu_">
-    <div class="menu-item" id="menu_tous_projets" title="Tous les projets">
-        <i class="fa-solid fa-folder-open"></i>
-        <span>Tous les projets</span>
-    </div>
+ 
     <div class="menu-item" id="menu_nouveau_projet" title="Nouveau projet" onclick="add_element(this)">
         <i class="fa-solid fa-folder-plus"></i>
         <span>Nouveau projet</span>

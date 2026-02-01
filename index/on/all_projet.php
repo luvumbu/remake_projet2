@@ -71,8 +71,8 @@
       }
 
       .id_projet {
-     
-       
+
+
           padding: 10px;
           margin: 25px;
           transition: 1s all;
@@ -113,14 +113,13 @@
 
       /* ===== CARTE ARCHIVE ===== */
       .archive-card {
-          border:1px solid  rgba(0, 11, 11, 0.2);
+          border: 1px solid rgba(0, 11, 11, 0.2);
           border-radius: 16px;
           padding: 20px;
-        background: linear-gradient(to bottom right, #0001ad, #00012f);
-
+          background: linear-gradient(to bottom right, #0001ad, #00012f);
           color: white;
 
-      
+
       }
 
       .archive-card {
@@ -152,14 +151,14 @@
 
       .archive-date {
           font-size: 12px;
-        
+
       }
 
       /* ===== DESC ===== */
       .archive-desc {
           margin: 10px 0 16px;
           font-size: 14px;
-  
+
       }
 
       /* ===== ACTIONS ===== */
@@ -184,13 +183,13 @@
       /* RESTAURER */
       .btn.restore {
           background: #22c55e;
-        
+
       }
 
       /* CONSULTER */
       .btn.view {
           background: #38bdf8;
-    
+
       }
 
       /* SUPPRIMER */
@@ -216,7 +215,7 @@
 
       h3 {
           font-size: 2em;
-         
+
           max-width: 100px;
           /* largeur maximale */
           position: relative;
@@ -227,13 +226,15 @@
           text-overflow: ellipsis;
           /* ajoute "..." si le texte est trop long */
       }
-      .archive-actions{
-        margin-top: 50px;
-        margin-bottom: 20px;
+
+      .archive-actions {
+          margin-top: 50px;
+          margin-bottom: 20px;
 
       }
-      .archive-desc{
-        background-color: white;
+
+      .archive-desc {
+          background-color: white;
       }
   </style>
 
@@ -254,5 +255,3 @@
           window.location.href = _this.title;
       }
   </script>
-
- 

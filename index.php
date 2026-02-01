@@ -1,12 +1,9 @@
 <?php
 session_start();
-
 require_once "index/require_once.php" ;
 // Récupère la valeur passée dans l'URL
-
 $default ="index/default.php";
-$projet_bdd ="projet/index.php"; 
- 
+$projet_bdd ="projet/index.php";  
 $url = $_GET['url'] ?? '';
 switch ($url) {
     case '':
@@ -24,8 +21,5 @@ switch ($url) {
     default:
     require_once $projet_bdd;
         break;
-}
- 
-
- 
+} 
 ?>

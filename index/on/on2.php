@@ -1,173 +1,261 @@
- <div class="projects-overview">
-     <div class="project-card active">
-         <div class="project-header">
-             <h3>Site e-commerce</h3>
-             <span class="status">Actif</span>
-         </div>
+<?php
 
-         <p class="project-desc">
-             Boutique en ligne avec paiement sécurisé.
-         </p>
-
-         <div class="project-meta">
-             <span><i class="fa-solid fa-user"></i> Maste</span>
-             <span><i class="fa-solid fa-calendar"></i> 12/01/2026</span>
-         </div>
-     </div>
-
-     <?php
-        /*
- SELECT *
-FROM projet p
-LEFT JOIN style s ON p.id_projet = s.id_projet_style
-LEFT JOIN projet_img pi ON p.id_projet = pi.id_projet_img
-WHERE p.id_user_projet = 1;
+/* ==============================
+   GROUPE PRINCIPAL
+================================ */
 
 
-*/
+$group = new Group(false);
 
-echo "ok/on2_ajax.php" ;
- /*
-        $databaseHandler = new DatabaseHandler($dbname, $username, $password);
+/* ==============================
+   CONTAINER PRINCIPAL
+================================ */
+$group->addElement([
+    'tag'   => 'div',
+    'attrs' => [
+        'id' => 'main_container',
+        'class'=>'display_none'
+        ],
+    'open'  => true,
+    'flag'  => false
+]);
 
-        // Je veux ma propre requête
-        $sql = " SELECT *
-                FROM projet p
-                LEFT JOIN style s ON p.id_projet = s.id_projet_style
-                LEFT JOIN projet_img pi ON p.id_projet = pi.id_projet_img
-                WHERE p.id_user_projet = 1;";
+/* ==============================
+   TITRE
+================================ */
+$group->addElement([
+    'tag'   => 'h1',
+    'attrs' => ['class' => 'h1_tag'],
+    'text'  => 'Création du projet',
+    'flag'  => true
+]);
 
-        // On exécute et on crée une variable globale $mes_projets
-        $result = $databaseHandler->select_custom_safe($sql, 'mes_projets');
+/* ==============================
+   INPUT — NOM DU PROJET
+================================ */
+$group->addElement(['tag' => 'div', 'open' => true]);
 
-        if ($result['success']) {
-            echo "<pre>";
-            var_dump($mes_projets); // accès direct via la variable globale
-            echo "</pre>";
-        } else {
-            echo "Erreur : " . $result['message'];
-        }
+$group->addElement([
+    'tag' => 'label',
+    'attrs' => ['for' => 'name_projet'],
+    'text' => 'Nom du projet',
+    'flag' => false
+]);
 
-        */
+$group->addElement([
+    'tag' => 'input',
+    'attrs' => [
+        'type' => 'text',
+        'id' => 'name_projet',
+        'placeholder' => 'Nom du projet'
+    ],
+    'self' => true,
+    'flag' => true
+]);
 
-echo "ok/on2_ajax.php" ;
+$group->addElement(['tag' => 'div', 'close' => true]);
 
+/* ==============================
+   TEXTAREA — DESCRIPTION
+================================ */
+$group->addElement(['tag' => 'div', 'open' => true]);
 
-
-
-
-echo "<div id='on2_ajax'></div>"
-
-
-
-
-/*
-// Connexion
-$databaseHandler = new DatabaseHandler($dbname, $username, $password);
-
- 
-$projectData = [
-    'id_user_projet' =>  1,
-    'img_projet_src_img' => '123456789' 
-];
-
-$resultProjet = $databaseHandler->insert_safe('projet_img', $projectData, 'id_projet');
-
-*/
-        ?>
+$group->addElement([
+    'tag' => 'label',
+    'attrs' => [
+        'for' => 'description_projet'
 
 
- </div>
+    ],
+    'text' => 'Description',
+    'flag' => false
+]);
 
- <style>
-     .projects-overview {
-         display: grid;
-         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-         gap: 20px;
-         padding: 20px;
-     }
+$group->addElement([
+    'tag' => 'textarea',
+    'attrs' => [
+        'id' => 'description_projet',
+        'placeholder' => 'Description du projet',
+        'class' => 'description_projet',
+        'rows' => '5'
+    ],
+    'text' => '',
+    'flag' => true
+]);
 
-     /* ===== CARTE ===== */
-     .project-card {
-         background: #0f172a;
-         border-radius: 16px;
-         padding: 18px;
-         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-         color: #e5e7eb;
-         transition: transform 0.2s ease, box-shadow 0.2s ease;
-         cursor: pointer;
-     }
+$group->addElement(['tag' => 'div', 'close' => true]);
 
-     .project-card:hover {
-         transform: translateY(-6px);
-         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-     }
+/* ==============================
+   BOUTON ENVOYER
+================================ */
+$group->addElement([
+    'tag'   => 'div',
+    'attrs' => [
+        'id'      => 'id_envoyer',
+        'onclick' => 'on_send_form(this)',
+        'class'   => 'envoyer'
+    ],
+    'text'  => 'Créer le projet',
+    'flag'  => true
+]);
 
-     /* ===== HEADER ===== */
-     .project-header {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         margin-bottom: 10px;
-     }
+/* ==============================
+   FERMETURE CONTAINER
+================================ */
+$group->addElement(['tag' => 'div', 'close' => true]);
 
-     .project-header h3 {
-         font-size: 17px;
-         margin: 0;
-     }
+/* ==============================
+   MANAGER
+================================ */
+$manager = new GroupManager('formData');
+$manager->addGroup($group);
 
-     /* ===== STATUS ===== */
-     .status {
-         font-size: 12px;
-         padding: 4px 10px;
-         border-radius: 999px;
-         font-weight: bold;
-     }
+/* ==============================
+   RENDU
+================================ */
+echo $manager->render();
+$manager->generateJsInformation('x.php');
+$manager->pushJs();
 
-     /* ===== DESCRIPTION ===== */
-     .project-desc {
-         font-size: 14px;
-         color: #cbd5f5;
-         margin: 10px 0 14px;
-         line-height: 1.4;
-     }
+?>
 
-     /* ===== META ===== */
-     .project-meta {
-         display: flex;
-         justify-content: space-between;
-         font-size: 13px;
-         color: #94a3b8;
-     }
+<style>
+    /* ===== TITRE ===== */
 
-     .project-meta i {
-         margin-right: 6px;
-     }
+    .display_none{
+        display: none;
+    }
+    .description_projet {
+        width: 100%;
+        border-radius: 7px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
 
-     /* ===== COULEURS PAR ETAT ===== */
-     .project-card.active .status {
-         background: #22c55e;
-         color: #052e16;
-     }
+    }
 
-     .project-card.paused .status {
-         background: #facc15;
-         color: #422006;
-     }
+    .h1_tag {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #1877f2;
+    }
 
-     .project-card.done .status {
-         background: #38bdf8;
-         color: #082f49;
-     }
- </style>
+    /* ===== CONTAINER ===== */
+    #main_container {
+        width: 360px;
+        margin: 50px auto;
+        padding: 25px 20px;
+        background-color: #1e293b;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+    }
 
+    /* Chaque div contenant un input */
+    #main_container>div {
+        margin-bottom: 15px;
+    }
+
+    /* ===== INPUTS ===== */
+    #main_container input[type="text"],
+    #main_container input[type="password"],
+    #main_container input[type="checkbox"] {
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    #main_container input[type="text"],
+    #main_container input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #main_container input:focus {
+        border-color: #1877f2;
+        box-shadow: 0 0 3px rgba(24, 119, 242, 0.6);
+    }
+
+    #main_container input::placeholder {
+        color: #999;
+    }
+
+    /* Checkbox alignement label à droite */
+    #main_container input[type="checkbox"] {
+        width: auto;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+    /* ===== LIEN MOT DE PASSE OUBLIÉ ===== */
+    #main_container a {
+        display: block;
+        font-size: 13px;
+        color: #1877f2;
+        text-decoration: none;
+        margin-bottom: 15px;
+        text-align: right;
+        transition: color 0.2s;
+    }
+
+    #main_container a:hover {
+        text-decoration: underline;
+        color: #145dbf;
+    }
+
+    /* ===== DIV ENVOYER ===== */
+    .envoyer {
+        background-color: rgba(140, 0, 0, 0.4);
+        text-align: center;
+        padding: 15px;
+        color: white;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    .envoyer:hover {
+        background-color: rgba(140, 0, 0, 0.6);
+    }
+</style>
 
 <script>
-      const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    document.getElementById("on2_ajax").innerHTML =
-    this.responseText;
-  }
-  xhttp.open("GET", "on/on2_ajax.php");
-  xhttp.send();
+    
+
+    function on_send_form() {
+
+
+
+console.log(formData ) ; 
+
+ 
+    if (typeof formData === 'undefined') {
+        console.warn('formData n\'existe pas encore !');
+        return;
+    }
+
+    for (let i = 0; i < formData.identite_tab.length; i++) {
+        let id = formData.identite_tab[i][0];
+        let value = '';
+
+        let el = document.getElementById(id);
+        if (el) {
+            if (el.type === 'checkbox') {
+                value = el.checked ? el.value : '0';
+            } else if (el.type === 'radio') {
+                let checked = document.querySelector('input[name="' + el.name + '"]:checked');
+                value = checked ? checked.value : '';
+            } else {
+                value = el.value;
+            }
+            formData.identite_tab[i][1] = value;
+        }
+    }
+
+    console.log('Valeurs à envoyer :', formData.identite_tab);
+    formData.push();
+
+   
+}
 </script>
