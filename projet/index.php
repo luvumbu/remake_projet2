@@ -1,5 +1,17 @@
 <?php
 require_once "projet/require_once.php";
+?>
+
+<a href="../">
+    <img width="50" height="50" src="https://img.icons8.com/ios/50/home--v1.png" alt="home--v1" />
+</a>
+
+
+<div id="index_child"></div>
+<?php
+
+
+require_once "projet/index_child.php";
 $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 
 // Je veux ma propre requête
@@ -10,7 +22,7 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projets');
 
 if ($result['success']) {
     echo "<pre>";
- //   var_dump($mes_projets); // accès direct via la variable globale
+    //   var_dump($mes_projets); // accès direct via la variable globale
     echo "</pre>";
 } else {
     echo "Erreur : " . $result['message'];
@@ -19,272 +31,16 @@ if ($result['success']) {
 
 
 
- 
+
 ?>
- 
- <a href="../">
- <img width="50" height="50" src="https://img.icons8.com/ios/50/home--v1.png" alt="home--v1"/>
- </a>
-   
+
+<link rel="stylesheet" href="projet/css_projet.css">
 
 
 
-<style>
-    * {
-        box-sizing: border-box;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    }
-
-    /* ===============================
-   CONTENEUR
-================================ */
-    .new-project {
-        max-width: 720px;
-        margin: 30px auto;
-        background: #1a273f;
-        /* moins sombre que #0f172a */
-        padding: 28px;
-        border-radius: 18px;
-        color: #e5e7eb;
-    }
-
-    /* ===============================
-   LABEL + INDICATEUR
-================================ */
-    .project-form label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 6px;
-        font-size: 14px;
-        color: #d1d9e6;
-        /* plus clair que #cbd5f5 */
-    }
-
-    .project-form .indicator {
-        font-size: 12px;
-        color: #a8b0bb;
-        /* plus clair que #9ca3af */
-    }
-
-    /* ===============================
-   EDITEURS (BASE)
-================================ */
-    .editor {
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, .25);
-        border-radius: 10px;
-        background: #2a3a53;
-        /* moins sombre que #1e293b */
-        color: #ffffff;
-        cursor: text;
-        outline: none;
-        transition: border-color .15s, box-shadow .15s;
-    }
-
-    /* PLACEHOLDER CONTENTEDITABLE */
-    .editor:empty::before {
-        content: attr(data-placeholder);
-        color: #b0b8c1;
-        /* plus clair que #9ca3af */
-        pointer-events: none;
-    }
-
-    /* ===============================
-   NOM DU PROJET (INPUT LIKE)
-================================ */
-    #project_name.editor {
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 1.4;
-        min-height: 42px;
-        padding: 10px 12px;
-        display: flex;
-        align-items: center;
-    }
-
-    /* ===============================
-   DESCRIPTION PROJET
-================================ */
-    #description_projet.editor {
-        min-height: 140px;
-        padding: 12px;
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    /* ===============================
-   GOOGLE TITLE / META CONTENT (COULEUR CLAIRE)
-================================ */
-    #google_title.editor,
-    #metacontent.editor {
-        min-height: 42px;
-        padding: 10px 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        background: #3b4c6b;
-        /* moins sombre que #2c3e50 */
-        border: 1px solid rgba(255, 255, 255, .25);
-        border-radius: 8px;
-        color: #e5e7eb;
-    }
-
-    #google_title.editor:empty::before,
-    #metacontent.editor:empty::before {
-        color: #c0c8d1;
-        /* plus clair que #b0b8c1 */
-    }
-
-    /* ===============================
-   FOCUS
-================================ */
-    .editor:focus {
-        border-color: #22c55e;
-        box-shadow: 0 0 0 2px rgba(34, 197, 94, .3);
-    }
-
-    /* ===============================
-   BOUTON ENVOI
-================================ */
-    .submit-btn {
-        margin-top: 22px;
-        background: #22c55e;
-        /* un vert un peu plus vif */
-        color: #052e16;
-        padding: 16px;
-        text-align: center;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: transform .15s, box-shadow .15s;
-    }
-
-    .submit-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 18px rgba(34, 197, 94, .4);
-    }
-
-    /* ===============================
-   CHECKBOX STYLING
-================================ */
-    input[type="checkbox"] {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 22px;
-        height: 22px;
-        border: 2px solid #d1d9e6;
-        /* plus clair que #cbd5f5 */
-        border-radius: 6px;
-        background-color: #2a3a53;
-        /* moins sombre que #1e293b */
-        cursor: pointer;
-        position: relative;
-        transition: all 0.2s ease;
-    }
-
-    input[type="checkbox"]:checked {
-        background: #22c55e;
-        /* vert */
-        border-color: #22c55e;
-    }
-
-    input[type="checkbox"]:checked::after {
-        content: '';
-        position: absolute;
-        left: 6px;
-        top: 2px;
-        width: 6px;
-        height: 12px;
-        border: solid white;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-    }
-
-    input[type="checkbox"]:hover {
-        border-color: #34d17a;
-    }
-</style>
 
 
-<style>
-    /* ===============================
-   INPUT PASSWORD (PROJET)
-================================ */
-    #password_projet {
-        width: 100%;
-        margin-top: 6px;
-        padding: 10px 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        color: #0f172a;
 
-        background: #f1f5f9;
-        /* clair */
-        border: 1px solid #cbd5f5;
-        border-radius: 10px;
-        background-color: #4f769c;
-        outline: none;
-        transition: border-color .15s, box-shadow .15s, background .15s;
-    }
-
-    /* Placeholder */
-    #password_projet::placeholder {
-        color: #94a3b8;
-    }
-
-    /* Focus */
-    #password_projet:focus {
-        background: #ffffff;
-        border-color: #22c55e;
-        box-shadow: 0 0 0 2px rgba(34, 197, 94, .25);
-    }
-
-    /* ===============================
-   LABEL + DESCRIPTION (RAPPEL)
-================================ */
-    label[for="password_projet"] {
-        color: #334155;
-        font-weight: 500;
-    }
-
-    .field-description {
-        font-size: 13px;
-        color: #64748b;
-        margin-bottom: 6px;
-    }
-</style>
-<style>
-    /* ===============================
-   price (INPUT NUMBER)
-================================ */
-    #price {
-        width: 100px;
-        min-height: 42px;
-        padding: 10px 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 10px;
-        background: #2a3a53;
-        /* même couleur que les éditeurs */
-        color: #ffffff;
-        outline: none;
-        transition: border-color .15s, box-shadow .15s;
-    }
-
-    /* PLACEHOLDER */
-    #price::placeholder {
-        color: #b0c8d1;
-        /* même que les placeholders des éditeurs */
-    }
-
-    /* FOCUS */
-    #price:focus {
-        border-color: #22c55e;
-        box-shadow: 0 0 0 2px rgba(34, 197, 94, .3);
-    }
-</style>
 <?php
 
 
@@ -295,7 +51,7 @@ $group->addElement([
     'tag' => 'div',
     'attrs' => ['class' => 'new-project'],
     'open' => true,
-    
+
     'flag' => true
 ]);
 
@@ -306,7 +62,7 @@ $group->addElement([
         'class' => 'project-form',
         'method' => 'POST',
         'action' => 'save.php'
-       
+
     ],
     'open' => true,
     'flag' => true
@@ -332,7 +88,7 @@ $attrs = [
     'type' => 'checkbox',
     'id'   => 'use_html_project_name',
     'name' => 'use_html_project_name',
-    'value'=> '1'
+    'value' => '1'
 ];
 
 // Ajoute checked seulement si = 1
@@ -367,13 +123,13 @@ $group->addElement([
         'id' => 'name_projet',
         'class' => 'editor',
         'contenteditable' => 'true',
-        
-      
+
+
 
 
         'data-placeholder' => 'Nom du projet...'
     ],
-      'text' => $mes_projets[0]["name_projet"],
+    'text' => $mes_projets[0]["name_projet"],
     'flag' => true
 ]);
 
@@ -453,8 +209,8 @@ $group->addElement([
         'spellcheck' => 'true',
         'data-placeholder' => 'Décris brièvement le projet...'
     ],
-    'text'=>$mes_projets[0]["description_projet"] , 
-     'flag' => true
+    'text' => $mes_projets[0]["description_projet"],
+    'flag' => true
 ]);
 
 $group->addElement([
@@ -486,11 +242,11 @@ $group->addElement([
         'spellcheck' => 'true',
         'data-placeholder' => 'Décris brièvement le projet...'
     ],
-    'text'=> $url , 
-     'flag' => true
+    'text' => $url,
+    'flag' => true
 ]);
 
- 
+
 
 
 
@@ -557,11 +313,11 @@ $group->addElement([
     'attrs' => [
         'id' => 'google_title',
         'class' => 'editor',
-        
+
         'contenteditable' => 'true',
         'data-placeholder' => 'Titre SEO Google...'
     ],
-    'text'=>$mes_projets[0]["google_title"],
+    'text' => $mes_projets[0]["google_title"],
     'flag' => true
 ]);
 $group->addElement([
@@ -671,10 +427,10 @@ $group->addElement([
         'id' => 'price',
         'min' => '0',
         'step' => '1',
-        'value'=>$mes_projets[0]["price"],
-        
+        'value' => $mes_projets[0]["price"],
+
     ],
-    
+
     'flag' => true
 ]);
 
@@ -768,7 +524,7 @@ $attrs = [
     'type' => 'checkbox',
     'id'   => 'active_voix_vocale',
     'name' => 'active_voix_vocale',
-    'value'=> '1' // valeur POST standard
+    'value' => '1' // valeur POST standard
 ];
 
 // Ajouter checked uniquement si la valeur vaut 1
@@ -819,9 +575,9 @@ $group->addElement([
         'placeholder' => 'Si le champ est vide alors y aura pas de mot de passe',
         'id' => 'password_projet',
         'autocomplete' => 'new-password',
-          'value'=>$mes_projets[0]["password_projet"]
+        'value' => $mes_projets[0]["password_projet"]
     ],
-  
+
     'flag' => true
 ]);
 $group->addElement([
@@ -829,6 +585,27 @@ $group->addElement([
     'close' => true,
     'flag' => true
 ]);
+
+
+
+$group->addElement([
+    'tag' => 'img',
+    'attrs' => [
+        'width' => '40',
+        'height' => '40',
+        'src' => 'https://img.icons8.com/color/48/add--v1.png',
+        'onclick' => 'add_child(this)',
+        'title' => $url,
+
+        'class' => 'add_child'
+
+
+    ],
+
+    'flag' => true
+]);
+
+
 
 
 
@@ -853,7 +630,7 @@ $group->addElement(['tag' => 'div', 'close' => true, 'flag' => true]);
 $manager = new GroupManager('formData');
 $manager->addGroup($group);
 echo $manager->render();
-$manager->generateJsInformation('x.php');
+$manager->generateJsInformation('req_on/update_front.php');
 $manager->pushJs();
 ?>
 
@@ -903,9 +680,9 @@ $manager->pushJs();
 
 
 
- <?php 
+<?php
 
- /*
+/*
     <div id="gallery-flex">
 
         <!-- IMAGE 1 -->
@@ -961,108 +738,74 @@ $manager->pushJs();
  */
 
 
-    ?>
+?>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<?php
+
+
+
+//var_dump($mes_projets[0]) ; 
+
+
+
+
+?>
+
+
+<script>
+    function add_child(_this) {
+
+
+        var ok = new Information("req_on/insert_projet_child.php"); // création de la classe 
+        ok.add("parent_projet", _this.title); // ajout de l'information pour lenvoi     
+        console.log(ok.info()); // demande l'information dans le tableau
+        ok.push(); // envoie l'information au code pkp 
+        window.scrollTo(0, 0);
+
+
+        const myTimeout = setTimeout(x, 250);
+
+        function x() {
+            location.reload();
+        }
+
+
+    }
+</script>
+
+
+<?php
+
+/*
+<div>
+    <h1>
+        <?= $mes_projets[0]["name_projet"] ?>
+    </h1>
+    <p>
+        <?= $mes_projets[0]["description_projet"] ?>
+    </p>
+</div>
+*/
+
+
+?>
 
 <style>
+    html {
+  scroll-behavior: smooth;
+}
 
-    .d_flex{
-        display: flex;
-    }
-    /* Conteneur gallery */
-    #gallery-flex {
-        display: flex;
-        /* display flex pour aligner les cartes */
-        gap: 20px;
-        flex-wrap: wrap;
-        max-width: 80%;
-        margin: auto;
-        justify-content: space-around;
-    }
-    .actions{
-        padding: 10px;
-    }
-
-    /* Carte image */
-    #gallery-flex .gallery-item {
-        display: flex;
-        /* display flex pour organiser contenu vertical */
-        flex-direction: column;
-        /* image + actions */
-        flex: 1 1 200px;
-        max-width: 260px;
-        border: 1px solid #ccc;
-        border-radius: 7px;
-        padding: 8px;
-        box-sizing: border-box;
-    }
-
-    /* Images */
-    #gallery-flex img {
-        width: 100%;
-        height: 200px;
-        /* hauteur fixe */
-        object-fit: cover;
-        /* remplissage sans déformation */
-        border-radius: 7px;
-        display: block;
-    }
-
-    /* Zone actions (checkbox, corbeille, étoile) */
-    #gallery-flex .actions {
-        display: flex;
-        /* flex pour aligner horizontalement */
-        align-items: center;
-        justify-content: space-between;
-        /* espace entre les éléments */
-        margin-top: 8px;
-    }
-
-    /* Checkbox */
-    #gallery-flex .check-remove {
-        cursor: pointer;
-    }
-
-    /* Corbeille */
-    #gallery-flex .remove_element {
-        cursor: pointer;
-        width: 22px;
-        height: 22px;
-        transition: transform 0.2s, opacity 0.2s;
-    }
-
-    #gallery-flex .remove_element:hover {
-        transform: scale(1.1);
-        opacity: 0.85;
-    }
-
-    /* Etoile */
-    #gallery-flex .star-wrap input {
-        display: none;
-        /* cacher le radio */
-    }
-
-    #gallery-flex .star {
-        width: 22px;
-        height: 22px;
-        cursor: pointer;
-        fill: transparent;
-        /* non sélectionnée */
-        stroke: #000;
-        /* contour noir */
-        stroke-width: 1.5;
-        transition: fill 0.2s;
-    }
-
-    /* Etoile sélectionnée */
-    #gallery-flex .star-wrap input:checked+.star {
-        fill: gold;
-    }
-    .display_none{
-        display: none;
-    }
-    .editor{
-        padding-top: 20px;
-        padding-bottom: 20px;
-
-    }
 </style>

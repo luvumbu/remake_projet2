@@ -3,15 +3,17 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 require_once "../Class/DatabaseHandler.php";
-require_once "../info_exe/dbCheck.php";
+require_once "../info_exe/dbCheck.php"; 
 $session_id_user = $_SESSION["info_index"][1][0]["id_user"];
+$parent_projet = $_POST["parent_projet"] ; 
 if(isset($session_id_user)){
 // Connexion
 $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 $projectData = [
     'id_user_projet' =>  $session_id_user,
     'name_projet' => '',
-    'description_projet' => ''
+    'description_projet' => '',
+    'parent_projet'=>$parent_projet
 ];
 $resultProjet = $databaseHandler->insert_safe('projet', $projectData, 'id_projet');
 if ($resultProjet['success']) {
@@ -44,3 +46,5 @@ $databaseHandler->closeConnection();
 else{
     echo "COnnectez vous pour faire le test";
 }
+
+ 

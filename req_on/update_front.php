@@ -1,6 +1,6 @@
 <?php
-require_once "Class/DatabaseHandler.php";
-require_once "info_exe/dbCheck.php";
+require_once "../Class/DatabaseHandler.php";
+require_once "../info_exe/dbCheck.php";
 
 if (!empty($_POST)) {
     // Transforme toutes les clés POST en variables locales
@@ -26,7 +26,6 @@ $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 $data = [
     'name_projet' => $name_projet,
     'description_projet' => $description_projet,
-
     'use_html_project_name' => $use_html_project_name,
     'use_html_description_projet' => $use_html_description_projet,
     'use_html_google_title' => $use_html_google_title,

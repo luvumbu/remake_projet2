@@ -1,7 +1,7 @@
   <?php
     $databaseHandler = new DatabaseHandler($dbname, $username, $password);
     // Je veux ma propre requête
-    $sql = "SELECT * FROM `projet` WHERE 1";
+
     // On exécute et on crée une variable globale $mes_projets
     $result = $databaseHandler->select_custom_safe($sql, 'mes_projets');
     if ($result['success']) {
@@ -71,8 +71,8 @@
       }
 
       .id_projet {
-          color: rgba(245, 245, 245, 0.84);
-          background-color: rgba(0, 0, 0, 0.35);
+     
+       
           padding: 10px;
           margin: 25px;
           transition: 1s all;
@@ -113,10 +113,14 @@
 
       /* ===== CARTE ARCHIVE ===== */
       .archive-card {
-          background: #0f172a;
+          border:1px solid  rgba(0, 11, 11, 0.2);
           border-radius: 16px;
           padding: 20px;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        background: linear-gradient(to bottom right, #0001ad, #00012f);
+
+          color: white;
+
+      
       }
 
       .archive-card {
@@ -148,14 +152,14 @@
 
       .archive-date {
           font-size: 12px;
-          color: #94a3b8;
+        
       }
 
       /* ===== DESC ===== */
       .archive-desc {
           margin: 10px 0 16px;
           font-size: 14px;
-          color: #cbd5f5;
+  
       }
 
       /* ===== ACTIONS ===== */
@@ -180,13 +184,13 @@
       /* RESTAURER */
       .btn.restore {
           background: #22c55e;
-          color: #052e16;
+        
       }
 
       /* CONSULTER */
       .btn.view {
           background: #38bdf8;
-          color: #082f49;
+    
       }
 
       /* SUPPRIMER */
@@ -212,7 +216,7 @@
 
       h3 {
           font-size: 2em;
-          color: white;
+         
           max-width: 100px;
           /* largeur maximale */
           position: relative;
@@ -227,6 +231,9 @@
         margin-top: 50px;
         margin-bottom: 20px;
 
+      }
+      .archive-desc{
+        background-color: white;
       }
   </style>
 

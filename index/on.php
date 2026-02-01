@@ -3,12 +3,11 @@
 <?php
 //var_dump( $_SESSION["info_index"]) ; 
 require_once "Class/Js.php";
-
 require_once "on/on1.php";
  //require_once "on/on2.php" ;
-require_once "on/on3_.php";
-require_once "on/on4.php" ;
-
+require_once "on/on3_.php"; 
+require_once "on/all_projet_sql.php" ;
+require_once "on/all_projet.php" ;
 ?>
 <script>
     function session_destroy() {
@@ -40,11 +39,7 @@ require_once "on/on4.php" ;
         xhttp.send();
         const myTimeout = setTimeout(add, 250);
         function add() {
-
-      
-
         window.location.href = $id_div;
-
 /*
             _this.style.display = "block";
             var dor = document.getElementById("on") ; 
