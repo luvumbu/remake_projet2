@@ -390,6 +390,7 @@ $group->addElement([
         'contenteditable' => 'true',
         'data-placeholder' => 'Meta description SEO...'
     ],
+    "text"=>$mes_projets[0]["metacontent"],
     'flag' => true
 ]);
 
