@@ -1,22 +1,4 @@
 
-<?php
-require_once "projet/index_child.php";
-$databaseHandler = new DatabaseHandler($dbname, $username, $password);
-
-// Je veux ma propre requête
-$sql = "SELECT * FROM `projet` WHERE `id_projet`='$url'";
-
-// On exécute et on crée une variable globale $mes_projets
-$result = $databaseHandler->select_custom_safe($sql, 'mes_projets');
-
-if ($result['success']) {
-    echo "<pre>";
-    //   var_dump($mes_projets); // accès direct via la variable globale
-    echo "</pre>";
-} else {
-    echo "Erreur : " . $result['message'];
-}
-?>
 
 
 
