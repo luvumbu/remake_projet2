@@ -401,29 +401,8 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projet_child');
 
 
 
-<div style="margin-top: 150px;"></div>
-<div class="display_flex">
-    <?php
+ 
 
-    if ($mes_projet_parent[0]["use_html_project_name"] == 0) {
-        echo '<div>' . $name_projet . '</div>';
-    } else {
-
-        echo '<div>' . $name_projet_n . '</div>';
-    }
-    ?>
-</div>
-
-<div class="description_projet">
-    <?php
-
-    if ($mes_projet_parent[0]["use_html_description_projet"] == 0) {
-        echo '<div>' . $description_projet . '</div>';
-    } else {
-        echo '<div>' . $description_projet_n . '</div>';
-    }
-    ?>
-</div>
 
 
 
@@ -484,6 +463,9 @@ if($mes_projet_parent[0]["id_user_projet"]==$_SESSION["info_index"][1][0]["id_us
         }
     }
 </script>
+
+
+<div style="margin-bottom: 150px;"></div>
 <?php 
 }
 
@@ -555,4 +537,18 @@ if($mes_projet_parent[0]["id_user_projet"]==$_SESSION["info_index"][1][0]["id_us
 </script>
 
 
+
+
+
+
+
+
+
+
+<?php 
+
+
+require_once "projet/index_html.php" ; 
+
+?>
 <a href="../">Index</a>
