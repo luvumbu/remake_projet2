@@ -1,11 +1,10 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <?php
 //var_dump( $_SESSION["info_index"]) ; 
+
 require_once "Class/Js.php";
 require_once "on/on1.php";
-require_once "on/on2.php" ;
-  
+require_once "on/on2.php" ;  
 require_once "on/all_projet_sql.php" ;
 require_once "on/all_projet.php" ;
 ?>

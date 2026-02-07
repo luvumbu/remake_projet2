@@ -32,7 +32,7 @@ if (!in_array($tableName, $tables, true)) {
 }
 
 // ======================================================
-// 2️⃣ TABLE projet  ✅ MODIF ICI
+// 2️⃣ TABLE projet
 $columnsProjet = [
     "id_projet" => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
     "id_user_projet" => "INT UNSIGNED NOT NULL",
@@ -50,9 +50,7 @@ $columnsProjet = [
     "parent_projet" => "INT UNSIGNED DEFAULT NULL",
     "description_projet" => "TEXT",
     "password_projet"=>"TEXT",
-    // 🔥 ICI : TEXT → INT (liaison image)
-    "img_projet" => "INT UNSIGNED DEFAULT NULL",
-
+    "img_projet"=>"TEXT",
     "date_inscription_projet" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
 ];
 $tableName = "projet";
@@ -85,8 +83,60 @@ $successFKParent = $databaseHandler->addForeignKey(
 $columnsStyle = [
     "id_style" => "INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY",
     "id_projet_style" => "INT(10) UNSIGNED",
-    "id_parent_style" => "INT(10) UNSIGNED",
-    "name_style" => "VARCHAR(20)",
+    "color_text" => "VARCHAR(20)",
+    "background_color" => "VARCHAR(20)",
+    "border_color" => "VARCHAR(20)",
+    "gradient_background" => "VARCHAR(255)",
+    "font_family" => "VARCHAR(100)",
+    "font_size" => "VARCHAR(10)",
+    "font_weight" => "VARCHAR(20)",
+    "font_style" => "VARCHAR(20)",
+    "line_height" => "VARCHAR(10)",
+    "text_align" => "VARCHAR(20)",
+    "text_decoration" => "VARCHAR(20)",
+    "text_transform" => "VARCHAR(20)",
+    "letter_spacing" => "VARCHAR(10)",
+    "word_spacing" => "VARCHAR(10)",
+    "border_width" => "VARCHAR(10)",
+    "border_style" => "VARCHAR(20)",
+    "border_radius" => "VARCHAR(10)",
+    "margin_top" => "VARCHAR(10)",
+    "margin_bottom" => "VARCHAR(10)",
+    "margin_left" => "VARCHAR(10)",
+    "margin_right" => "VARCHAR(10)",
+    "padding_top" => "VARCHAR(10)",
+    "padding_bottom" => "VARCHAR(10)",
+    "padding_left" => "VARCHAR(10)",
+    "padding_right" => "VARCHAR(10)",
+    "box_shadow" => "VARCHAR(100)",
+    "text_shadow" => "VARCHAR(100)",
+    "width" => "VARCHAR(20)",
+    "height" => "VARCHAR(20)",
+    "max_width" => "VARCHAR(20)",
+    "max_height" => "VARCHAR(20)",
+    "min_width" => "VARCHAR(20)",
+    "min_height" => "VARCHAR(20)",
+    "display" => "VARCHAR(20)",
+    "position" => "VARCHAR(20)",
+    "top" => "VARCHAR(20)",
+    "bottom" => "VARCHAR(20)",
+    "left" => "VARCHAR(20)",
+    "right" => "VARCHAR(20)",
+    "z_index" => "INT(11)",
+    "flex_direction" => "VARCHAR(20)",
+    "justify_content" => "VARCHAR(20)",
+    "align_items" => "VARCHAR(20)",
+    "flex_wrap" => "VARCHAR(20)",
+    "grid_template_columns" => "VARCHAR(255)",
+    "grid_template_rows" => "VARCHAR(255)",
+    "grid_gap" => "VARCHAR(20)",
+    "transition" => "VARCHAR(255)",
+    "animation" => "VARCHAR(255)",
+    "overflow" => "VARCHAR(20)",
+    "overflow_x" => "VARCHAR(20)",
+    "overflow_y" => "VARCHAR(20)",
+    "visibility" => "VARCHAR(20)",
+    "cursor" => "VARCHAR(50)",
     "date_inscription_style" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
 ];
 $tableName = "style";
@@ -132,16 +182,18 @@ $successFKParams = $databaseHandler->addForeignKey(
 );
 
 // ======================================================
-// 5️⃣ TABLE projet_img
+// 5️⃣ TABLE projet_img (✅ MODIFIÉE : id_user_img OBLIGATOIRE)
 $columnsProjetImg = [
-    "id_projet_img_auto" => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
-    "id_user_img" => "INT UNSIGNED NOT NULL",
-    "id_projet_img" => "INT UNSIGNED NOT NULL",
-    "img_projet_src_img" => "LONGTEXT NOT NULL",
-    "extension_img" => "VARCHAR(10)",
-    "date_inscription_projet_img" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
-    "is_selected" => "TINYINT UNSIGNED DEFAULT 0",
-    "is_checked" => "TINYINT UNSIGNED DEFAULT 0"
+"id_projet_img_auto"       => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
+"id_user_img"              => "INT UNSIGNED NOT NULL",
+"id_projet_img"            => "INT UNSIGNED NOT NULL",
+"img_projet_src_img"       => "LONGTEXT NOT NULL",
+"extension_img"            => "VARCHAR(10)",
+"date_inscription_projet_img" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+"is_selected"              => "TINYINT UNSIGNED DEFAULT 0",   // valeur de 0 à 10 pour la radio
+"is_checked"               => "TINYINT UNSIGNED DEFAULT 0"    // valeur de 0 à 10 pour la checkbox
+
+
 ];
 $tableName = "projet_img";
 if (!in_array($tableName, $tables, true)) {
@@ -168,13 +220,61 @@ $successFK2 = $databaseHandler->addForeignKey(
     "CASCADE"
 );
 
-// 🔥 FK projet → projet_img (IMAGE PRINCIPALE)
-$successFKImgProjet = $databaseHandler->addForeignKey(
+// ======================================================
+// 6️⃣ TABLE social_media
+$columnsSocialMedia = [
+    "id_social_media" => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
+    "id_user_social_media" => "INT UNSIGNED NOT NULL",
+    "name_social_media" => "VARCHAR(100) NOT NULL",
+    "statut_social_media" => "VARCHAR(50)",
+    "date_inscription_social_media" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+];
+$databaseHandler->create_table("social_media", $columnsSocialMedia);
+$successFK3 = $databaseHandler->addForeignKey(
+    "social_media",
+    "id_user_social_media",
+    "profil_user",
+    "id_user",
+    "CASCADE",
+    "CASCADE"
+);
+
+// ======================================================
+// 7️⃣ TABLE comment
+$columnsComment = [
+    "id_comment" => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
+    "id_user_comment" => "INT UNSIGNED NOT NULL",
+    "comment_text" => "TEXT NOT NULL",
+    "date_inscription_comment" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+];
+$tableName = "comment";
+if (!in_array($tableName, $tables, true)) {
+    $databaseHandler->create_table($tableName, $columnsComment);
+}
+$successFK4 = $databaseHandler->addForeignKey(
+    "comment",
+    "id_user_comment",
+    "profil_user",
+    "id_user",
+    "CASCADE",
+    "CASCADE"
+);
+
+// ======================================================
+// 8️⃣ TABLE req_quiz
+$columnsReqQuiz = [
+    "id_req_quiz" => "INT UNSIGNED AUTO_INCREMENT PRIMARY KEY",
+    "id_projet_req_quiz" => "INT UNSIGNED NOT NULL",
+    "question_req_quiz" => "TEXT NOT NULL",
+    "date_inscription_req_quiz" => "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+];
+$databaseHandler->create_table("req_quiz", $columnsReqQuiz);
+$successFK5 = $databaseHandler->addForeignKey(
+    "req_quiz",
+    "id_projet_req_quiz",
     "projet",
-    "img_projet",
-    "projet_img",
-    "id_projet_img_auto",
-    "SET NULL",
+    "id_projet",
+    "CASCADE",
     "CASCADE"
 );
 
@@ -197,7 +297,9 @@ if (
     $successFKParams &&
     $successFK2 &&
     $successFKImgUser &&
-    $successFKImgProjet
+    $successFK3 &&
+    $successFK4 &&
+    $successFK5
 ) {
     $content = <<<PHP
 <?php

@@ -30,7 +30,7 @@ $group->addElement([
 /* ==============================
    h2
 ================================ */
-$grouh2->addElement([
+$grouh->addElement([
     'tag'  => 'h2',
     'text' => 'Bonjour h2',
     'flag' => true

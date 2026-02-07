@@ -1,12 +1,6 @@
+<?php 
 
 
-
-
-
-
-
-
-<?php
 
 
 $group = new Group(false);
@@ -355,7 +349,7 @@ $group->addElement([
         'contenteditable' => 'true',
         'data-placeholder' => 'Meta description SEO...'
     ],
-    "text"=>$mes_projets[0]["metacontent"],
+    "text" => $mes_projets[0]["metacontent"],
     'flag' => true
 ]);
 
@@ -598,143 +592,9 @@ $manager->addGroup($group);
 echo $manager->render();
 $manager->generateJsInformation('req_on/update_front.php');
 $manager->pushJs();
+
+ 
 ?>
 
 
 
-
-<script>
-    function on_send_form() {
-
-        if (typeof formData === 'undefined') {
-            console.warn('formData n\'existe pas encore !');
-            return;
-        }
-
-        for (let i = 0; i < formData.identite_tab.length; i++) {
-            let id = formData.identite_tab[i][0];
-            let value = '';
-
-            let el = document.getElementById(id);
-            if (el) {
-                // Pour les div contenteditable (éditeur)
-                if (el.contentEditable === "true") {
-                    value = el.innerHTML;
-                }
-                // Pour checkbox
-                else if (el.type === 'checkbox') {
-                    value = el.checked ? '1' : '0';
-                }
-                // Pour radio (si nécessaire)
-                else if (el.type === 'radio') {
-                    let checked = document.querySelector('input[name="' + el.name + '"]:checked');
-                    value = checked ? checked.value : '';
-                }
-                // Pour les autres inputs classiques
-                else {
-                    value = el.value;
-                }
-
-                formData.identite_tab[i][1] = value;
-            }
-        }
-
-        console.log('Valeurs à envoyer :', formData.identite_tab);
-        formData.push();
-    }
-</script>
-
-
-
-<?php
-
-/*
-    <div id="gallery-flex">
-
-        <!-- IMAGE 1 -->
-        <div class="gallery-item">
-            <img src="https://i.pinimg.com/736x/5e/54/9f/5e549f54dd92ff0fc96dd2f44f3f9c2b.jpg" alt="">
-
-            <div class="actions">
-                <!-- Checkbox -->
-                <input type="checkbox" class="check-remove">
-
-                <!-- Corbeille -->
-                <img
-                    src="https://img.icons8.com/ios-glyphs/30/trash--v1.png"
-                    class="remove_element"
-                    alt="Supprimer"
-                    title="Supprimer">
-
-                <!-- Etoile -->
-                <label class="star-wrap">
-                    <input type="radio" name="mainImage">
-                    <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
-                        <polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.8 5.5 21 7.5 13.5 2 9 9 9" />
-                    </svg>
-                </label>
-            </div>
-        </div>
-
-        <!-- IMAGE 2 -->
-        <div class="gallery-item">
-            <img src="https://i.pinimg.com/736x/5e/54/9f/5e549f54dd92ff0fc96dd2f44f3f9c2b.jpg" alt="">
-
-            <div class="actions">
-                <!-- Checkbox -->
-                <input type="checkbox" class="check-remove">
-
-                <!-- Corbeille -->
-                <img
-                    src="https://img.icons8.com/ios-glyphs/30/trash--v1.png"
-                    class="remove_element"
-                    alt="Supprimer"
-                    title="Supprimer">
-
-                <!-- Etoile -->
-                <label class="star-wrap">
-                    <input type="radio" name="mainImage">
-                    <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
-                        <polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.8 5.5 21 7.5 13.5 2 9 9 9" />
-                    </svg>
-                </label>
-            </div>
-        </div>
-    </div>
- */
-
-
-?>
-
-
-<?php
-
-
-
-//var_dump($mes_projets[0]) ; 
-
-
-
-
-?>
-
-
-<script>
-    function add_child(_this) {
-        var ok = new Information("req_on/insert_projet.php"); // création de la classe 
-        ok.add("parent_projet", _this.title); // ajout de l'information pour lenvoi     
-        console.log(ok.info()); // demande l'information dans le tableau
-        ok.push(); // envoie l'information au code pkp 
-        window.scrollTo(0, 0);
-        const myTimeout = setTimeout(x, 250);
-        function x() {
-            location.reload();
-        }
-    }
-</script>
-<style>
-    html {
-  scroll-behavior: smooth;
-}
-
-</style>
