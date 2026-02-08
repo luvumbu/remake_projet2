@@ -83,6 +83,8 @@ if (isset($_SESSION["info_index"][1])) {
 
 <div id="index_form" style="display: none;">
     <?php
+    require_once "index/on/all_projet_sql_child.php";
+    require_once "index/on/all_projet.php";
     require_once "projet/index_form.php";
     ?>
 </div>
@@ -98,7 +100,7 @@ if (isset($_SESSION["info_index"][1])) {
 </div>
 
 <?php
- 
+
 $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 
 // Je veux ma propre requête
@@ -401,7 +403,7 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projet_child');
 
 
 
- 
+
 
 
 
@@ -415,58 +417,58 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projet_child');
 
 
 <?php
- 
 
 
-if($mes_projet_parent[0]["id_user_projet"]==$_SESSION["info_index"][1][0]["id_user"]){
+
+if ($mes_projet_parent[0]["id_user_projet"] == $_SESSION["info_index"][1][0]["id_user"]) {
 ?>
 
 
-<script>
+    <script>
         function file_dowload() {
 
 
-        if (document.getElementById("file_dowload_x").style.display == "block") {
-            document.getElementById("file_dowload_x").style.display = "none";
+            if (document.getElementById("file_dowload_x").style.display == "block") {
+                document.getElementById("file_dowload_x").style.display = "none";
 
-        } else {
-            document.getElementById("file_dowload_x").style.display = "block";
+            } else {
+                document.getElementById("file_dowload_x").style.display = "block";
+
+            }
+
 
         }
 
-
-    }
-
-    function modifier_projet() {
-        var index_on_group = document.getElementById("index_on_group").className;
+        function modifier_projet() {
+            var index_on_group = document.getElementById("index_on_group").className;
 
 
 
-        if (index_on_group == "") {
+            if (index_on_group == "") {
 
-            document.getElementById("index_on_group").className = "display_none";
+                document.getElementById("index_on_group").className = "display_none";
 
-        } else {
-            index_on_group = "";
+            } else {
+                index_on_group = "";
 
-            document.getElementById("index_on_group").className = "";
+                document.getElementById("index_on_group").className = "";
+            }
         }
-    }
 
-    function modifier_projet() {
-        if (document.getElementById("index_form").style.display == "block") {
-            document.getElementById("index_form").style.display = "none";
+        function modifier_projet() {
+            if (document.getElementById("index_form").style.display == "block") {
+                document.getElementById("index_form").style.display = "none";
 
-        } else {
-            document.getElementById("index_form").style.display = "block";
+            } else {
+                document.getElementById("index_form").style.display = "block";
 
+            }
         }
-    }
-</script>
+    </script>
 
 
-<div style="margin-bottom: 150px;"></div>
-<?php 
+    <div style="margin-bottom: 150px;"></div>
+<?php
 }
 
 ?>
@@ -545,10 +547,10 @@ if($mes_projet_parent[0]["id_user_projet"]==$_SESSION["info_index"][1][0]["id_us
 
 
 
-<?php 
+<?php
 
 
-require_once "projet/index_html.php" ; 
+require_once "projet/index_html.php";
 
 ?>
 <a href="../">Index</a>
