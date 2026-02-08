@@ -303,10 +303,7 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_images');
         color: white;
     }
 
-    .description_projet {
-        margin-top: 50px;
-        text-align: center;
-    }
+ 
 </style>
 
  <script>

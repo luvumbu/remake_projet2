@@ -125,12 +125,7 @@ $manager->pushJs();
     .display_none{
         display: none;
     }
-    .description_projet {
-        width: 100%;
-        border-radius: 7px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
 
-    }
 
     .h1_tag {
         text-align: center;

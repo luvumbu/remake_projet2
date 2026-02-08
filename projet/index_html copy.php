@@ -89,16 +89,16 @@ if ($result['success']) {
         if (!isset($projets[$idProjet])) {
             $projets[$idProjet] = [
                 'id_projet' => $row['id_projet'],
-                'name_projet'      => $row['name_projet'],
-                'description_projet' => $row['description_projet'],
+                'name'      => $row['name_projet'],
+                'description' => $row['description_projet'],
                 'price'     => $row['price'],
-                'parent_projet'    => $row['parent_projet'],
+                'parent'    => $row['parent_projet'],
 
                 'user' => [
-                    'id_user'     => $row['id_user'],
-                    'nom_user'    => $row['nom_user'],
-                    'prenom_user' => $row['prenom_user'],
-                    'email_user'  => $row['email_user'],
+                    'id'     => $row['id_user'],
+                    'nom'    => $row['nom_user'],
+                    'prenom' => $row['prenom_user'],
+                    'email'  => $row['email_user'],
                 ],
 
                 'style' => [
@@ -107,17 +107,17 @@ if ($result['success']) {
                 ],
 
                 'params' => [
-                    'param_visibilite'     => $row['param_visibilite'],
-                    'param_qr'     => $row['param_qr'],
-                    'param_prix'        => $row['param_prix'],
-                    'param_title'       => $row['param_title'],
-                    'param_description' => $row['param_description'],
+                    'visible'     => $row['param_visibilite'],
+                    'qr_code'     => $row['param_qr'],
+                    'prix'        => $row['param_prix'],
+                    'title'       => $row['param_title'],
+                    'description' => $row['param_description'],
                 ],
 
                 'image_principale' => $row['main_img_id'] ? [
-                    'main_img_id'  => $row['main_img_id'],
-                    'main_img_src' => $row['main_img_src'],
-                    'main_img_ext' => $row['main_img_ext'],
+                    'id'  => $row['main_img_id'],
+                    'src' => $row['main_img_src'],
+                    'ext' => $row['main_img_ext'],
                 ] : null,
 
                 'images' => []
@@ -129,9 +129,9 @@ if ($result['success']) {
         // ============================
         if (!empty($row['galerie_img_id'])) {
             $projets[$idProjet]['images'][$row['galerie_img_id']] = [
-                'galerie_img_id'         => $row['galerie_img_id'],
-                'galerie_img_src'        => $row['galerie_img_src'],
-                'galerie_img_ext'        => $row['galerie_img_ext'],
+                'id'         => $row['galerie_img_id'],
+                'src'        => $row['galerie_img_src'],
+                'ext'        => $row['galerie_img_ext'],
                 'is_selected'=> $row['is_selected'],
                 'is_checked' => $row['is_checked'],
             ];
@@ -157,6 +157,7 @@ if ($result['success']) {
  
 
 
+    echo count($xx) ; 
 
 
 
@@ -166,7 +167,7 @@ if ($result['success']) {
 
 
 <?php 
-/*
+
 $description_projet = $mes_projet_parent[0]["description_projet"];
 $description_projet_n = html_vers_texte_brut($description_projet);
 // Ensuite entourer d'une div pour avoir une structure HTML
@@ -245,113 +246,42 @@ $name_projet_n = html_premier_caractere($name_projet_n, 'span', 'jaune');
 
 
 <?php
- 
-*/
+     
+
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
+ echo "<br/>" ; 
 
 
 
 
 
 
+     var_dump(   $databaseHandler) ; 
 
- 
+// Je veux ma propre requête
+$sql = "SELECT * FROM `projet_img` WHERE 1";
 
-
-
- 
-
-
-
-for ($i=0; $i <count($xx) ; $i++) { 
+// On exécute et on crée une variable globale $mes_projets
+$result = $databaseHandler->select_custom_safe($sql, 'mes_images');
 
 
 
 
 
-
-$name_projet = html_vers_texte_brut( $xx[$i]["name_projet"]);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$name_projet = '<div>' .  $name_projet . '</div>';
-
-// Enfin ajouter le span au premier caractère
-$name_projet = html_premier_caractere($name_projet, 'span', 'rouge');
-
-
-
-
-
- 
-echo $name_projet ; 
-
-
-?>
-
-<div class="zoom-wrapper">
-    <img
-        src="<?= 'file_dowload/uploads/' . $xx[$i]['image_principale']['main_img_src'] ?>"
-        alt=""
-    >
-</div>
-<?php 
-
-
-
-
-
-$description_projet = html_vers_texte_brut( $xx[$i]["description_projet"]);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$description_projet = '<div>' .  $description_projet . '</div>';
-
-// Enfin ajouter le span au premier caractère
-$description_projet = html_premier_caractere($description_projet, 'span', 'rouge');
-
-
-echo $description_projet ; 
-
-
-
-
-
-}
-
-
-
-
-
-?>
-
-
-
-
-
-
-
-<style>
-    .zoom-wrapper {
-    width: 400px;
-    height: 250px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    cursor: zoom-in;
-}
-
-.zoom-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    /* 🔍 ZOOM LOCALISÉ */
-    transform: scale(1.6);
-    transform-origin: 65% 40%; /* X% Y% → zone zoomée */
-
-    transition: transform 0.4s ease;
-}
-
-/* 🎯 OPTION : zoom dynamique au survol */
-.zoom-wrapper:hover img {
-    transform: scale(2);
-}
-
-</style>
-
+var_dump($mes_images) ; 

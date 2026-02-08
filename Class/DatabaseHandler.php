@@ -1285,7 +1285,7 @@ $databaseHandler = new DatabaseHandler($dbname, $username, $password);
 
 
 // 🔹 Utilisation d'une jointure entre deux tables : utilisateur et projet
-//    Ici, on veut récupérer des informations des utilisateurs ET leurs projets associés.
+//    Ici, on veut récupérer des informations des futilisateurs ET leurs projets associés.
 //    On utilise une clé primaire (dans la table principale) et une clé étrangère (dans la table secondaire)
 $projects = $databaseHandler->select_join(
     'utilisateur',         // table principale (celle qui contient la clé primaire)

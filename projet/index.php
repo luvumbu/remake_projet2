@@ -83,9 +83,13 @@ if (isset($_SESSION["info_index"][1])) {
 
 <div id="index_form" style="display: none;">
     <?php
+
+
+    require_once "projet/index_form.php";
+
+
     require_once "index/on/all_projet_sql_child.php";
     require_once "index/on/all_projet.php";
-    require_once "projet/index_form.php";
     ?>
 </div>
 
@@ -142,25 +146,7 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projet_parent');
 
 
 
-$description_projet = $mes_projet_parent[0]["description_projet"];
-$description_projet_n = html_vers_texte_brut($description_projet);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$description_projet_n = '<div>' .  $description_projet_n . '</div>';
 
-// Enfin ajouter le span au premier caractère
-$description_projet_n = html_premier_caractere($description_projet_n, 'span', 'rouge');
-
-
-
-
-
-
-$name_projet = $mes_projet_parent[0]["name_projet"];
-$name_projet_n = html_vers_texte_brut($name_projet);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$name_projet_n = '<div>' .  $name_projet_n . '</div>';
-// Enfin ajouter le span au premier caractère
-$name_projet_n = html_premier_caractere($name_projet_n, 'span', 'rouge');
 
 
 
@@ -368,17 +354,7 @@ $result = $databaseHandler->select_custom_safe($sql, 'mes_projet_child');
         margin: auto;
     }
 
-    .rouge {
-        background-color: green;
-        font-size: 2em;
-        padding: 5px;
-        color: white;
-    }
 
-    .description_projet {
-        margin-top: 50px;
-        text-align: center;
-    }
 </style>
 <script>
     // Tableau qui va contenir tous les ID
