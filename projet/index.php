@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="projet/css_projet.css">
+
+
 <?php
 require_once "projet/require_once.php";
 $databaseHandler = new DatabaseHandler($dbname, $username, $password);

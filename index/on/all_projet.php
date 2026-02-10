@@ -1,7 +1,6 @@
   <?php
     $databaseHandler = new DatabaseHandler($dbname, $username, $password);
-    // Je veux ma propre requête
-
+    // Je veux ma propre requête    
     // On exécute et on crée une variable globale $mes_projets
     $result = $databaseHandler->select_custom_safe($sql, 'mes_projets');
     if ($result['success']) {

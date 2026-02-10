@@ -1,5 +1,4 @@
-<?php 
- 
+<?php
 // ======================================
 // 🔹 Sécurité basique
 // ======================================
@@ -255,33 +254,147 @@ $name_projet_n = html_premier_caractere($name_projet_n, 'span', 'jaune');
 
 
  
+$name_projet               = [];
+$name_projet_span_1        = [];
+$name_projet_span_2        = [];
+
+$description_projet        = [];
+$description_projet_span_1 = [];
+$description_projet_span_2 = [];
+
+for ($i = 0; $i < count($xx); $i++) {
+
+    /* ===============================
+       NAME PROJET
+    =============================== */
+
+    // valeur brute
+    $name_brut = html_vers_texte_brut($xx[$i]["name_projet"]);
+
+    // structure HTML
+    $name_html = '<div>' . $name_brut . '</div>';
+
+    // span premier caractère
+    $name_html_span = html_premier_caractere($name_html, 'span', 'colors_title');
+
+    // stockage
+    $name_projet[]        = $name_html;
+    $name_projet_span_1[] = $name_brut;
+    $name_projet_span_2[] = $name_html_span;
+
+
+    /* ===============================
+       DESCRIPTION PROJET
+    =============================== */
+
+    $desc_brut = html_vers_texte_brut($xx[$i]["description_projet"]);
+
+    $desc_html = '<div>' . $desc_brut . '</div>';
+
+    $desc_html_span = html_premier_caractere($desc_html, 'span', 'colors_description');
+
+    $description_projet[]        = $desc_html;
+    $description_projet_span_1[] = $desc_brut;
+    $description_projet_span_2[] = $desc_html_span;
+}
+
+
+
+
+
+echo '<div class="elements">' ; 
+for ($i=0; $i <count($name_projet) ; $i++) { 
+
+
+if($mes_projet_parent[$i]["name_projet"]!=""){
+    echo '<a href="#x'.$xx[$i]["id_projet"] .'">  <div>'.$name_projet_span_2[$i].'</div></a>' ; 
+
+}
+ }
+
+?>
+
+
+  <input type="text" id="searchInput" placeholder="Rechercher un article...">
+ 
+<?php 
+ echo '</div>' ;
+?>
+
+ <div style="margin-top: 100px;"></div>
+<style>
+    .articles{
+        margin-top: 350px;
+    }
+  body {
+    font-family: Arial, sans-serif;
+ 
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0001ad;
+    margin-bottom: 20px;
+  }
+
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .search-bar input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #0001ad;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .articles {
+    max-width:80%;
+    margin: auto;
+  }
+
+  .article {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+ 
 
 
 
  
 
+<div class="articles">
+<?php 
 
 
-for ($i=0; $i <count($xx) ; $i++) { 
-
-
-
-
-
-
-$name_projet = html_vers_texte_brut( $xx[$i]["name_projet"]);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$name_projet = '<div>' .  $name_projet . '</div>';
-
-// Enfin ajouter le span au premier caractère
-$name_projet = html_premier_caractere($name_projet, 'span', 'rouge');
+for ($i=0; $i <count($name_projet) ; $i++) { 
 
 
 
 
 
+if($xx[$i]["name_projet"]!=""){
+echo '<div id="x'.$xx[$i]["id_projet"].'" class="article titre">'.$name_projet[$i].'</div>';
+
+}
  
-echo $name_projet ; 
+
+
+if($xx[$i]['image_principale']['main_img_src']!=""){
 
 
 ?>
@@ -293,65 +406,175 @@ echo $name_projet ;
     >
 </div>
 <?php 
-
-
-
-
-
-$description_projet = html_vers_texte_brut( $xx[$i]["description_projet"]);
-// Ensuite entourer d'une div pour avoir une structure HTML
-$description_projet = '<div>' .  $description_projet . '</div>';
-
-// Enfin ajouter le span au premier caractère
-$description_projet = html_premier_caractere($description_projet, 'span', 'rouge');
-
-
-echo $description_projet ; 
-
-
-
-
-
+    
 }
 
 
+if($xx[$i]["description_projet"]!=""){
+echo '<div class="article ar_c">'.$description_projet[$i].'</div>';
 
-
-
+}
+}
 ?>
 
+ 
 
 
+ <a href="../">
+     <div class="article ar_c"><img width="60" height="60" src="https://img.icons8.com/doodle-line/60/home.png" alt="home"/></div>
+ </a>
+</div>
+<script>
+const input = document.getElementById('searchInput');
+const articles = document.querySelectorAll('.article');
 
+input.addEventListener('input', () => {
+  const filter = input.value.toLowerCase();
 
-
+  articles.forEach(article => {
+    const text = article.textContent.toLowerCase();
+    article.classList.toggle('hidden', !text.includes(filter));
+  });
+});
+</script>
 
 <style>
-    .zoom-wrapper {
-    width: 400px;
-    height: 250px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    cursor: zoom-in;
+    .ar_c{
+        text-align: justify;
+    }
+.titre{
+   
+    border-radius: 0;
+     
+    text-align: center;
+    font-size: 2em;
+    color: rgba(240, 0, 45, 0.90);
+}
+.colors_title{
+ 
+        background-color: rgb(24, 68, 24);
+        padding: 10px;
+        margin: 0;
 }
 
+    .colors_description{
+        color: greenyellow;
+    }
+
+    .elements{
+        display: flex;
+        justify-content: space-around;
+        background-color: black;
+        color: white;
+     
+    }
+    .elements div div {
+        padding: 15px;
+    }
+
+
+      .elements div div {
+       color: white;
+       background-color: rgba(225, 225, 240, 0.61);
+       cursor: pointer;
+    }
+    body{
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+ <style>
+    /* ==============================
+   ZOOM WRAPPER
+============================== */
+.zoom-wrapper {
+    position: relative;
+    width: 50%;            /* largeur contrôlée */
+    height: 460px;           /* hauteur contrôlée */
+    overflow: hidden;
+ margin: auto;
+
+    background: #0b0f1a;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 15px 40px rgba(0,0,0,0.8),
+        inset 0 0 40px rgba(0,255,255,0.04);
+
+    cursor: zoom-in;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+}
+
+/* ==============================
+   IMAGE
+============================== */
 .zoom-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 
-    /* 🔍 ZOOM LOCALISÉ */
-    transform: scale(1.6);
-    transform-origin: 65% 40%; /* X% Y% → zone zoomée */
+    transition:
+        transform 0.6s cubic-bezier(.25,.8,.25,1),
+        filter 0.4s ease;
 
-    transition: transform 0.4s ease;
+    transform-origin: center;
 }
 
-/* 🎯 OPTION : zoom dynamique au survol */
-.zoom-wrapper:hover img {
-    transform: scale(2);
+/* ==============================
+   ZOOM LOCALISÉ (ZONE CENTRALE)
+============================== */
+ 
+
+/* ==============================
+   OVERLAY FUTURISTE
+============================== */
+.zoom-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,255,255,0.15) 0%,
+            rgba(0,0,0,0.75) 70%
+        );
+
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
+.zoom-wrapper:hover::after {
+    opacity: 1;
+}
+
+/* ==============================
+   CADRE LUMINEUX
+============================== */
+.zoom-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+
+    border: 1px solid rgba(0,255,255,0.25);
+    box-shadow:
+        0 0 12px rgba(0,255,255,0.3),
+        inset 0 0 12px rgba(0,255,255,0.15);
+
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.zoom-wrapper:hover::before {
+    opacity: 1;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
 </style>
-
